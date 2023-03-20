@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import "./App.css";
 
@@ -22,7 +22,7 @@ function App() {
   };
   return (
     <>
-      <h1> Shopping Products</h1>
+      <h1> Add products into your Cart</h1>
 
       {items.map((product) => {
         return (
@@ -37,20 +37,23 @@ function App() {
           </>
         );
       })}
-
-      <ul>
+      <h1> My Cart</h1>
+      <CartContainer>
         {cartItems.map((cartItem, index) => {
           return (
-            <List
-              onClick={() => {
-                handleRemove(index);
-              }}
-            >
+            <List>
               {cartItem}
+              <DeleteButton
+                onClick={() => {
+                  handleRemove(index);
+                }}
+              >
+                delete
+              </DeleteButton>
             </List>
           );
         })}
-      </ul>
+      </CartContainer>
     </>
   );
 }
@@ -73,12 +76,29 @@ const Button = styled.button`
   font-size: 18px;
   padding: 5px;
   border-radius: 5px;
-  outline: 1px solid white;
   cursor: pointer;
   margin-right: 30px;
 `;
+
+const DeleteButton = styled.button`
+  margin-left: 10px;
+  background-color: #77466b;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+`;
+
 const List = styled.li`
   font-size: 18px;
   color: #77466b;
   cursor: pointer;
+  margin-bottom: 10px;
+`;
+
+const CartContainer = styled.ul`
+  width: 400px;
+  min-height: 200px;
+  height: 100%;
+  border: 3px solid violet;
+  padding: 20px;
 `;
